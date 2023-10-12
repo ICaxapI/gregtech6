@@ -220,9 +220,9 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		MultiTileEntityRegistry.onServerStop();
 	}
 	
-	@SubscribeEvent public void onWorldSave  (WorldEvent.Save   aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
-	@SubscribeEvent public void onWorldLoad  (WorldEvent.Load   aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
-	@SubscribeEvent public void onWorldUnload(WorldEvent.Unload aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
+	@SubscribeEvent(priority = EventPriority.LOWEST) public void onWorldSave  (WorldEvent.Save   aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
+	@SubscribeEvent(priority = EventPriority.LOWEST) public void onWorldLoad  (WorldEvent.Load   aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
+	@SubscribeEvent(priority = EventPriority.LOWEST) public void onWorldUnload(WorldEvent.Unload aEvent) {checkSaveLocation(aEvent.world.getSaveHandler().getWorldDirectory(), F);}
 	
 	public  static final List<ITileEntityServerTickPre  > SERVER_TICK_PRE                = new ArrayListNoNulls<>(), SERVER_TICK_PR2  = new ArrayListNoNulls<>();
 	public  static final List<ITileEntityServerTickPost > SERVER_TICK_POST               = new ArrayListNoNulls<>(), SERVER_TICK_PO2T = new ArrayListNoNulls<>();
@@ -231,7 +231,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	public  static       List<ITileEntityScheduledUpdate> SCHEDULED_TILEENTITY_UPDATES   = new ArrayListNoNulls<>();
 	private static       List<ITileEntityScheduledUpdate> SCHEDULED_TILEENTITY_UPDATES_2 = new ArrayListNoNulls<>();
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void onServerTick(ServerTickEvent aEvent) {
 		TOOL_SOUNDS = TOOL_SOUNDS_SETTING;
@@ -512,7 +512,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onLivingUpdate(LivingUpdateEvent aEvent) {
 		int
 		tX = UT.Code.roundDown(aEvent.entityLiving.posX),
@@ -564,7 +564,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onWorldTick(WorldTickEvent aEvent) {
 		TOOL_SOUNDS = TOOL_SOUNDS_SETTING;
 		
@@ -657,14 +657,14 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onPlayerItemPickupEvent(cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent aEvent) {
 		UT.Inventories.checkAchievements(aEvent.player, aEvent.pickedUp.getEntityItem());
 	}
 	
 	private int BEAR_INVENTORY_COOL_DOWN = 5;
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onPlayerTickEvent(PlayerTickEvent aEvent) {
 		if (!aEvent.player.isDead && aEvent.phase == Phase.END) {
 			
@@ -844,7 +844,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onChunkWatchEvent(ChunkWatchEvent.Watch aEvent) {
 		Chunk tChunk = aEvent.player.worldObj.getChunkFromChunkCoords(aEvent.chunk.chunkXPos, aEvent.chunk.chunkZPos);
 		if (tChunk != null && tChunk.isTerrainPopulated) {
@@ -859,7 +859,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onPlayerDestroyItem(PlayerDestroyItemEvent aEvent) {
 		// Uhh, why is this null? Must be a Bug somewhere else.
 		if (aEvent.original == null) return;
@@ -919,7 +919,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		return;
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onItemUseFinish(PlayerUseItemEvent.Finish aEvent) {
 		int[] tStats = FoodsGT.get(aEvent.item);
 		if (tStats != null) {
@@ -949,7 +949,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST) 
 	public void onPlayerInteraction(PlayerInteractEvent aEvent) {
 		if (aEvent.entityPlayer == null || aEvent.entityPlayer.worldObj == null || aEvent.action == null || aEvent.world.provider == null) return;
 		
@@ -1152,12 +1152,12 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onUseHoeEvent(net.minecraftforge.event.entity.player.UseHoeEvent aEvent) {
 		if (aEvent.world.getBlock(aEvent.x, aEvent.y, aEvent.z) == Blocks.dirt && aEvent.world.getBlockMetadata(aEvent.x, aEvent.y, aEvent.z) != 0) aEvent.setCanceled(T);
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	@SuppressWarnings("unlikely-arg-type")
 	public void onBlockBreakSpeedEvent(PlayerEvent.BreakSpeed aEvent) {
 		if (aEvent.newSpeed > 0) {
@@ -1196,7 +1196,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST) 
 	public void onBlockBreakingEvent(BlockEvent.BreakEvent aEvent) {
 		if (aEvent.block instanceof IPrefixBlock && EnchantmentHelper.getSilkTouchModifier(aEvent.getPlayer())) aEvent.setExpToDrop(0);
 	}
@@ -1286,7 +1286,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntitySpawningEvent(EntityJoinWorldEvent aEvent) {
 		if (aEvent.entity instanceof EntityItem && !aEvent.entity.worldObj.isRemote) {
 			ItemStack aStack = ST.update(OM.get(((EntityItem)aEvent.entity).getEntityItem()), aEvent.entity);
@@ -1315,12 +1315,12 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	
 	public static List<EntityPlayerMP> mNewPlayers = new ArrayListNoNulls<>();
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onLivingDeath(LivingDeathEvent aEvent) {
 		if (aEvent.entityLiving instanceof EntityPlayerMP) NW_API.sendToPlayer(new PacketDeathPoint(UT.Code.roundDown(aEvent.entityLiving.posX), UT.Code.roundDown(aEvent.entityLiving.posY), UT.Code.roundDown(aEvent.entityLiving.posZ)), (EntityPlayerMP)aEvent.entityLiving);
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onLoginEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent aEvent) {
 		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES) ic2.api.recipe.Recipes.compressor.getRecipes().clear();
 		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES ) ic2.api.recipe.Recipes.extractor .getRecipes().clear();
@@ -1337,13 +1337,13 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		GT6WorldGenerator.generate(aWorld, aChunkX << 4, aChunkZ << 4, F);
 	}
 	/*
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void populate(PopulateChunkEvent.Post aEvent) {
 		WorldGeneratorGT6.generate(aEvent.world, aEvent.chunkX << 4, aEvent.chunkZ << 4, F);
 	}
 	*/
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onItemExpireEvent(ItemExpireEvent aEvent) {
 		if (aEvent.entity.worldObj.isRemote) return;
 		ItemStack aStack = aEvent.entityItem.getEntityItem();
@@ -1385,7 +1385,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onCheckSpawnEvent(LivingSpawnEvent.CheckSpawn aEvent) {
 		if (aEvent.getResult() == Result.DENY) return;
 		Class<? extends EntityLivingBase> aMobClass = aEvent.entityLiving.getClass();
@@ -1417,12 +1417,12 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		if (SPAWN_ZONE_MOB_PROTECTION && UT.Code.inside(-144, 144, aX-aWorld.getWorldInfo().getSpawnX()) && UT.Code.inside(-144, 144, aZ-aWorld.getWorldInfo().getSpawnZ()) && WD.opq(aWorld, aX, 0, aZ, F, F)) {aEvent.setResult(Result.DENY); return;}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityConstructingEvent(EntityConstructing aEvent) {
 		if (Abstract_Mod.sFinalized >= Abstract_Mod.sModCountUsingGTAPI && aEvent.entity instanceof EntityPlayer) EntityFoodTracker.add((EntityPlayer)aEvent.entity);
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onArrowNockEvent(ArrowNockEvent aEvent) {
 		if (!aEvent.isCanceled() && ST.valid(aEvent.result) && UT.Inventories.getProjectile(TD.Projectiles.ARROW, aEvent.entityPlayer.inventory) != null) {
 			aEvent.entityPlayer.setItemInUse(aEvent.result, aEvent.result.getItem().getMaxItemUseDuration(aEvent.result));
@@ -1430,7 +1430,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onArrowLooseEvent(ArrowLooseEvent aEvent) {
 		ItemStack aArrow = UT.Inventories.getProjectile(TD.Projectiles.ARROW, aEvent.entityPlayer.inventory);
 		if (!aEvent.isCanceled() && ST.valid(aEvent.bow) && aArrow != null && aEvent.bow.getItem() instanceof ItemBow) {
