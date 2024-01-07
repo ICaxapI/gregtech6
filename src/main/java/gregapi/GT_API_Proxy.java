@@ -248,6 +248,9 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 				SYNC_SECOND = (SERVER_TIME % 20 == 0);
 				
 				if (SERVER_TIME++ == 0) {
+					// Initial Save Data check
+					checkSaveLocation(DimensionManager.getCurrentSaveRootDirectory(), F);
+					
 					// Unification Stuff
 					HashSetNoNulls<ItemStack> tStacks = new HashSetNoNulls<>(10000);
 					
@@ -492,6 +495,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 						}
 					}
 				}
+				
 				for (int i = 0; i < SERVER_TICK_PO2T.size(); i++) {
 					ITileEntityServerTickPost tTileEntity = SERVER_TICK_PO2T.get(i);
 					if (tTileEntity.isDead()) {
@@ -507,7 +511,11 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 						}
 					}
 				}
+				
 				EntityFoodTracker.tick();
+				
+				if (SERVER_TIME % 1200 == 0) checkSaveLocation(DimensionManager.getCurrentSaveRootDirectory(), T);
+				
 				if (TICK_LOCK.isHeldByCurrentThread()) TICK_LOCK.unlock();
 			}
 		}
@@ -648,8 +656,6 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 			}
 			
 			if (SERVER_TIME % 20 == 1) {
-				checkSaveLocation(DimensionManager.getCurrentSaveRootDirectory(), SERVER_TIME % 1200 == 1);
-				
 				for (int i = 0; i < aEvent.world.loadedTileEntityList.size(); i++) {
 					TileEntity aTileEntity = (TileEntity)aEvent.world.loadedTileEntityList.get(i);
 					if (aTileEntity instanceof ITileEntityNeedsSaving) WD.mark(aTileEntity);
