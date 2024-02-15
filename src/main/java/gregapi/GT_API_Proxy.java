@@ -190,7 +190,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		
 		if (tSave && mSaveLocation != null) {
 			// Only print this if it is not the minutely Autosave.
-			if (aSaveLocation == null) OUT.println("Saving  World! " + mSaveLocation); else DEB.println("Autosave! " + mSaveLocation);
+			if (aSaveLocation == null) OUT.println("Saving  World! " + mSaveLocation);// else DEB.println("Autosave!      " + mSaveLocation);
 			// Make the Folder to drop the Save Files into.
 			new File(mSaveLocation, "gregtech").mkdirs();
 			// Call the Save Function in all the things that need it.
@@ -956,7 +956,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		}
 	}
 	
-	@SubscribeEvent(priority = EventPriority.HIGHEST) 
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onPlayerInteraction(PlayerInteractEvent aEvent) {
 		if (aEvent.entityPlayer == null || aEvent.entityPlayer.worldObj == null || aEvent.action == null || aEvent.world.provider == null) return;
 		
