@@ -358,21 +358,21 @@ public interface ITexture {
 			if (aRenderer.enableAO) {
 				Tessellator.instance.setColorOpaque_F(aRenderer.colorRedTopLeft, aRenderer.colorGreenTopLeft, aRenderer.colorBlueTopLeft);
 				Tessellator.instance.setBrightness(aRenderer.brightnessTopLeft);
-				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMaxZ3, tMinX2, tMinZ2);
+				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMaxZ3, tMinX2, tMaxZ2);
 				Tessellator.instance.setColorOpaque_F(aRenderer.colorRedBottomLeft, aRenderer.colorGreenBottomLeft, aRenderer.colorBlueBottomLeft);
 				Tessellator.instance.setBrightness(aRenderer.brightnessBottomLeft);
-				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMinZ3, tMinX1, tMaxZ1);
+				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMinZ3, tMinX1, tMinZ1);
 				Tessellator.instance.setColorOpaque_F(aRenderer.colorRedBottomRight, aRenderer.colorGreenBottomRight, aRenderer.colorBlueBottomRight);
 				Tessellator.instance.setBrightness(aRenderer.brightnessBottomRight);
-				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMinZ3, tMaxX2, tMaxZ2);
+				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMinZ3, tMaxX2, tMinZ2);
 				Tessellator.instance.setColorOpaque_F(aRenderer.colorRedTopRight, aRenderer.colorGreenTopRight, aRenderer.colorBlueTopRight);
 				Tessellator.instance.setBrightness(aRenderer.brightnessTopRight);
-				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMaxZ3, tMaxX1, tMinZ1);
+				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMaxZ3, tMaxX1, tMaxZ1);
 			} else {
-				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMaxZ3, tMinX2, tMinZ2);
-				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMinZ3, tMinX1, tMaxZ1);
-				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMinZ3, tMaxX2, tMaxZ2);
-				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMaxZ3, tMaxX1, tMinZ1);
+				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMaxZ3, tMinX2, tMaxZ2);
+				Tessellator.instance.addVertexWithUV(tMinX3, tMinY3, tMinZ3, tMinX1, tMinZ1);
+				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMinZ3, tMaxX2, tMinZ2);
+				Tessellator.instance.addVertexWithUV(tMaxX3, tMinY3, tMaxZ3, tMaxX1, tMaxZ1);
 			}
 		}
 		
